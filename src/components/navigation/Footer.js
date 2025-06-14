@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Link, IconButton, Divider } from '@mui/material';
+import { Box, Container, Typography, Link, IconButton } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { LinkedIn, GitHub, Email } from '@mui/icons-material';
 import { motion } from 'framer-motion';

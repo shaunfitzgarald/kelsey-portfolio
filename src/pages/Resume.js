@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Container, Grid, Paper, Divider, Button, useTheme, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Download } from '@mui/icons-material';
+import CaseStudy from '../components/CaseStudy';
 
 const Resume = () => {
   const theme = useTheme();
@@ -51,6 +52,22 @@ const Resume = () => {
         ]
       }
     ],
+    caseStudy: {
+      role: "Sales & Client Experience Manager",
+      company: "Bridging Gaps",
+      period: "2017 - 2020",
+      location: "Global (Remote)",
+      summary: "As the first international hire, I was instrumental in scaling the sales and client experience functions for this global internship provider. I developed and implemented strategies that significantly improved lead conversion, client satisfaction, and operational efficiency, contributing to a 300% growth in program participants.",
+      problem: "The company faced challenges in converting leads from diverse international markets and ensuring a consistent, high-quality experience for clients from inquiry to post-program engagement. Processes were manual, and there was a lack of a structured approach to sales and client management.",
+      solution: "I established a structured sales pipeline using HubSpot CRM, developed targeted communication strategies for different markets, and created a comprehensive client journey map. I also implemented a feedback system to continuously improve the client experience and introduced new program offerings based on market demand.",
+      results: [
+        "Increased lead-to-client conversion rate by 50% within the first year.",
+        "Achieved a 95% client satisfaction rate through personalized support and engagement.",
+        "Contributed to a 300% growth in the number of program participants over three years.",
+        "Successfully launched and managed new programs in emerging markets, expanding the company's global footprint."
+      ],
+      skills: ["Sales Strategy", "Client Relationship Management", "HubSpot CRM", "Cross-cultural Communication", "Process Improvement", "Program Development"]
+    },
     education: [
       {
         degree: "MBA in Marketing",
@@ -218,6 +235,8 @@ const Resume = () => {
                 ))}
               </Paper>
             </Grid>
+
+            <CaseStudy caseStudy={resumeData.caseStudy} />
 
             {/* Right Column */}
             <Grid item xs={12} md={4}>
