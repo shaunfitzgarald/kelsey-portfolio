@@ -134,7 +134,7 @@ const Contact = () => {
                       <Email color="primary" sx={{ mr: 2, fontSize: 24 }} />
                       <Box>
                         <Typography variant="subtitle2" color="text.secondary">Email</Typography>
-                        <Typography variant="body1">kelsey@example.com</Typography>
+                        <Typography variant="body1">kelsey@kelseysinclaire.com</Typography>
                       </Box>
                     </Box>
 
@@ -150,7 +150,7 @@ const Contact = () => {
                       <LocationOn color="primary" sx={{ mr: 2, fontSize: 24 }} />
                       <Box>
                         <Typography variant="subtitle2" color="text.secondary">Location</Typography>
-                        <Typography variant="body1">San Francisco, CA</Typography>
+                        <Typography variant="body1">San Diego, CA</Typography>
                       </Box>
                     </Box>
                   </Box>
@@ -313,7 +313,7 @@ const Contact = () => {
             >
               <Box
                 component="iframe"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.99640994534!2d-122.52000195716043!3d37.75776267633799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1623456789012!5m2!1sen!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53632.68402107316!2d-117.2125871!3d32.715738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9549b8e8f9c1d%3A0x4e5e7ff7b7c8e6b5!2sSan%20Diego%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1718398482000!5m2!1sen!2s"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

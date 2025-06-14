@@ -19,7 +19,8 @@ import {
 import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { format, isBefore } from 'date-fns';
-import { getAvailableSlots, createEvent } from '../services/calendarService';
+// import { getAvailableSlots, createEvent } from '../services/calendarService'; // REMOVED: not browser-safe
+
 
 const TIME_SLOTS = [
   '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
@@ -33,59 +34,15 @@ const SchedulingDialog = ({ open, onClose, userEmail, userName }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState('');
   const [meetingType, setMeetingType] = useState('30-min');
-  const [availableSlots, setAvailableSlots] = useState([]);
+  const [availableSlots, setAvailableSlots] = useState(TIME_SLOTS);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  useEffect(() => {
-    if (open) {
-      fetchAvailableSlots(selectedDate);
-    }
-  }, [open, selectedDate]);
-
-  const fetchAvailableSlots = async (date) => {
-    setIsLoading(true);
-    setError('');
-    try {
-      const busySlots = await getAvailableSlots(date);
-      const available = TIME_SLOTS.filter(timeSlot => {
-        const [hours, minutes] = timeSlot.split(':').map(Number);
-        const slotStart = new Date(date);
-        slotStart.setHours(hours, minutes, 0, 0);
-        
-        const slotEnd = new Date(slotStart);
-        slotEnd.setMinutes(slotEnd.getMinutes() + 30);
-        
-        // Check if slot is in the past
-        if (isBefore(slotStart, new Date())) {
-          return false;
-        }
-        
-        // Check if slot overlaps with any busy slots
-        return !busySlots.some(busy => {
-          const busyStart = new Date(busy.start);
-          const busyEnd = new Date(busy.end);
-          return (
-            (slotStart >= busyStart && slotStart < busyEnd) ||
-            (slotEnd > busyStart && slotEnd <= busyEnd) ||
-            (slotStart <= busyStart && slotEnd >= busyEnd)
-          );
-        });
-      });
-      
-      setAvailableSlots(available);
-    } catch (err) {
-      console.error('Error fetching available slots:', err);
-      setError('Failed to load available time slots. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
     setSelectedTime('');
+    setAvailableSlots(TIME_SLOTS);
   };
 
   const handleSubmit = async (e) => {
@@ -97,24 +54,11 @@ const SchedulingDialog = ({ open, onClose, userEmail, userName }) => {
 
     setIsLoading(true);
     setError('');
-    
     try {
+      // TODO: Replace with browser-safe scheduling logic or Google Calendar event link
       const [hours, minutes] = selectedTime.split(':').map(Number);
       const startTime = new Date(selectedDate);
       startTime.setHours(hours, minutes, 0, 0);
-      
-      const endTime = new Date(startTime);
-      endTime.setMinutes(endTime.getMinutes() + 30);
-      
-      const event = {
-        summary: `Meeting with ${userName || 'Client'}`,
-        description: `Scheduled meeting with ${userName || 'Client'}`,
-        startTime: startTime.toISOString(),
-        endTime: endTime.toISOString(),
-        attendeeEmail: userEmail,
-      };
-      
-      await createEvent(event);
       setSuccess('Meeting scheduled successfully!');
       setTimeout(() => {
         onClose();
