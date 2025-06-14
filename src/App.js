@@ -7,6 +7,8 @@ import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import { AnimatePresence } from 'framer-motion';
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/resume" element={<Resume />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
             </Routes>
           </AnimatePresence>
         </Layout>

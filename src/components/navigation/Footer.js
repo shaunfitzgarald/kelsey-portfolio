@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Container, Typography, Link, IconButton } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { LinkedIn, GitHub, Email } from '@mui/icons-material';
+import { LinkedIn, Language, Email } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 const socialLinks = [
@@ -11,13 +11,13 @@ const socialLinks = [
     label: 'LinkedIn',
   },
   {
-    icon: <GitHub sx={{ fontSize: 24 }} />,
-    url: 'https://github.com/kelsey-stephenson',
-    label: 'GitHub',
+    icon: <Language sx={{ fontSize: 24 }} />,
+    url: 'https://kelseysinclaire.com',
+    label: 'Portfolio',
   },
   {
     icon: <Email sx={{ fontSize: 24 }} />,
-    url: 'mailto:kelsey@example.com',
+    url: 'mailto:kelsey@kelseysinclaire.com',
     label: 'Email',
   },
 ];
@@ -45,9 +45,17 @@ const Footer = () => {
             gap: 3,
           }}
         >
-          <Typography variant="body2" color="text.secondary">
-            © {currentYear} Kelsey Stephenson. All rights reserved.
-          </Typography>
+          <Box>
+            <Typography variant="body2" color="text.secondary">
+              © {currentYear} Kelsey Stephenson. All rights reserved.
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+              Made with <span role="img" aria-label="love">❤️</span> by{' '}
+              <Link href="https://github.com/shaunfitzgarald" target="_blank" rel="noopener" underline="hover" color="inherit" sx={{ fontWeight: 500 }}>
+                shaunfitzgarald
+              </Link>.
+            </Typography>
+          </Box>
           
           <Box sx={{ display: 'flex', gap: 2 }}>
             {socialLinks.map((social, index) => (
@@ -82,7 +90,7 @@ const Footer = () => {
           <Box sx={{ display: 'flex', gap: 2 }}>
             <Link
               component={RouterLink}
-              to="/privacy"
+              to="/privacy-policy"
               variant="body2"
               color="text.secondary"
               sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
@@ -91,7 +99,7 @@ const Footer = () => {
             </Link>
             <Link
               component={RouterLink}
-              to="/terms"
+              to="/terms-of-service"
               variant="body2"
               color="text.secondary"
               sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
