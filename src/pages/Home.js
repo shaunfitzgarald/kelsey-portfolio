@@ -9,7 +9,7 @@ const Home = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const heroContent = {
-    title: "Kelsey Stephenson",
+    title: "Kelsey Sinclaire Stephenson",
     subtitle: "Performance Marketing, Customer Success & Growth Leader",
     description: "Driving business growth through data-driven marketing strategies and exceptional customer experiences. Specializing in performance marketing, customer success, and revenue growth.",
     ctaPrimary: "View Resume",

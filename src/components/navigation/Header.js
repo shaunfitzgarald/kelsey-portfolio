@@ -82,7 +82,7 @@ const Header = () => {
                   color: 'inherit',
                 }}
               >
-                Kelsey Stephenson
+                Kelsey Sinclaire Stephenson
               </Box>
             </MuiLink>
 
