@@ -47,7 +47,7 @@ const Footer = () => {
         >
           <Box>
             <Typography variant="body2" color="text.secondary">
-              © {currentYear} Kelsey Stephenson. All rights reserved.
+              © {currentYear} Kelsey Sinclaire Stephenson. All rights reserved.
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
               Made with <span role="img" aria-label="love">❤️</span> by{' '}
