@@ -8,6 +8,29 @@ const Resume = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  // Move handleDownload above any usage
+  const handleDownload = () => {
+    // Assumes PDF is placed in public/kelsey_stephenson_resume.pdf
+    const link = document.createElement('a');
+    link.href = process.env.PUBLIC_URL + '/kelsey_stephenson_resume.pdf';
+    link.download = 'kelsey_stephenson_resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const downloadButton = (
+    <Button
+      variant="contained"
+      color="primary"
+      startIcon={<Download />}
+      onClick={handleDownload}
+      sx={{ mb: 3 }}
+    >
+      Download PDF Resume
+    </Button>
+  );
+
   // Sample resume data - replace with Kelsey's actual information
   const resumeData = {
     summary: "Performance Marketing and Customer Success Leader with 10+ years of experience driving growth and delivering exceptional customer experiences. Proven track record of developing data-driven strategies that increase revenue, improve customer retention, and optimize marketing performance.",
@@ -106,12 +129,6 @@ const Resume = () => {
     ]
   };
 
-  const handleDownload = () => {
-    // This would typically download the actual resume PDF
-    alert("Downloading resume...");
-    // In a real implementation, you would link to the actual resume file
-    // window.open('/path/to/resume.pdf', '_blank');
-  };
 
   const SkillBar = ({ name, level }) => (
     <Box sx={{ mb: 2 }}>
@@ -175,6 +192,9 @@ const Resume = () => {
               Download Resume
             </Button>
           </Box>
+          <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 800, mx: 'auto', mb: 4 }}>
+            A summary of my professional experience, education, and skills.
+          </Typography>
 
           <Grid container spacing={4}>
             {/* Left Column */}
