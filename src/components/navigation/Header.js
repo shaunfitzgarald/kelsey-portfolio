@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useScrollTrigger, Slide, AppBar, Toolbar, Box, Button, IconButton, useMediaQuery, useTheme, Container, Link as MuiLink } from '@mui/material';
+import { useScrollTrigger, Slide, AppBar, Toolbar, Box, Button, IconButton, useMediaQuery, useTheme, Container, Link as MuiLink, Menu, MenuItem } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { motion } from 'framer-motion';
@@ -20,14 +20,19 @@ function HideOnScroll({ children }) {
 }
 
 const Header = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const isMenuOpen = Boolean(menuAnchorEl);
   const [scrolled, setScrolled] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const location = useLocation();
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const handleMenuOpen = (event) => {
+    setMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
   };
 
   useEffect(() => {
@@ -58,6 +63,29 @@ const Header = () => {
         }}
       >
         <Container maxWidth="lg">
+          {isMobile && (
+            <Menu
+              anchorEl={menuAnchorEl}
+              open={isMenuOpen}
+              onClose={handleMenuClose}
+              keepMounted
+              PaperProps={{
+                sx: { mt: 1, minWidth: 160 }
+              }}
+            >
+              {navItems.map((item) => (
+                <MenuItem
+                  key={item.path}
+                  component={RouterLink}
+                  to={item.path}
+                  selected={location.pathname === item.path}
+                  onClick={handleMenuClose}
+                >
+                  {item.name}
+                </MenuItem>
+              ))}
+            </Menu>
+          )}
           <Toolbar disableGutters sx={{ minHeight: 80, justifyContent: 'space-between' }}>
             <MuiLink
               component={RouterLink}
@@ -89,15 +117,15 @@ const Header = () => {
             {isMobile ? (
               <IconButton
                 color="inherit"
-                aria-label="open drawer"
+                aria-label="open menu"
                 edge="start"
-                onClick={handleDrawerToggle}
+                onClick={handleMenuOpen}
                 sx={{
                   display: { md: 'none' },
-                  color: scrolled ? 'text.primary' : 'common.white',
+                  color: '#222', // Always dark for visibility
                 }}
               >
-                <MenuIcon />
+                <MenuIcon sx={{ color: '#222' }} />
               </IconButton>
             ) : (
               <Box sx={{ display: 'flex', gap: 2 }}>
