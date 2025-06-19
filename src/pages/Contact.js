@@ -15,6 +15,11 @@ import { motion } from 'framer-motion';
 import { Email, Phone, LocationOn, Schedule, CalendarMonth } from '@mui/icons-material';
 import SchedulingDialog from '../components/SchedulingDialog';
 
+import { useEffect } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Contact = () => {
   const theme = useTheme();
   // const isMobile = useMediaQuery(theme.breakpoints.down('md')); // Unused
@@ -29,8 +34,31 @@ const Contact = () => {
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
   const [isScheduling, setIsScheduling] = useState(false);
-  // const [selectedDate, setSelectedDate] = useState(null); // Unused
-  // const [selectedTime, setSelectedTime] = useState(null); // Unused
+
+  // Contact info state
+  const defaultContact = {
+    email: 'kelseystephenson6@gmail.com',
+    phone: '+1 (929) 423-7429',
+    location: 'San Diego, CA',
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107093.2175467336!2d-117.28253897431653!3d32.82424024089873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9548ed8e5c4b9%3A0x8e3d4b6c8f1b6a8b!2sSan%20Diego%2C%20CA!5e0!3m2!1sen!2sus!4v1687040400000!5m2!1sen!2sus'
+  };
+  const [contactInfo, setContactInfo] = useState(defaultContact);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      try {
+        const docSnap = await getDoc(doc(db, 'site_content', 'contact'));
+        if (docSnap.exists()) {
+          setContactInfo({ ...defaultContact, ...docSnap.data() });
+        }
+      } catch (err) {
+        // fallback to defaultContact
+      }
+      setLoading(false);
+    };
+    fetchContact();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,6 +102,14 @@ const Contact = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{ py: 8 }}>
       <Container maxWidth="lg">
@@ -97,7 +133,7 @@ const Contact = () => {
               Get In Touch
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ mt: 2, maxWidth: 700, mx: 'auto' }}>
-              Have questions or want to work together? Send me a message or schedule a meeting directly through my calendar.
+              Have questions or want to work together? Send me a message or give me a call.
             </Typography>
           </Box>
         </motion.div>
@@ -134,7 +170,7 @@ const Contact = () => {
                       <Email color="primary" sx={{ mr: 2, fontSize: 24 }} />
                       <Box>
                         <Typography variant="subtitle2" color="text.secondary">Email</Typography>
-                        <Typography variant="body1">kelsey@kelseysinclaire.com</Typography>
+                        <Typography variant="body1">{contactInfo.email}</Typography>
                       </Box>
                     </Box>
 
@@ -142,7 +178,7 @@ const Contact = () => {
                       <Phone color="primary" sx={{ mr: 2, fontSize: 24 }} />
                       <Box>
                         <Typography variant="subtitle2" color="text.secondary">Phone</Typography>
-                        <Typography variant="body1">+1 (555) 123-4567</Typography>
+                        <Typography variant="body1">{contactInfo.phone}</Typography>
                       </Box>
                     </Box>
 
@@ -150,13 +186,13 @@ const Contact = () => {
                       <LocationOn color="primary" sx={{ mr: 2, fontSize: 24 }} />
                       <Box>
                         <Typography variant="subtitle2" color="text.secondary">Location</Typography>
-                        <Typography variant="body1">San Diego, CA</Typography>
+                        <Typography variant="body1">{contactInfo.location}</Typography>
                       </Box>
                     </Box>
                   </Box>
                 </Box>
 
-                <Box sx={{ mt: 4, pt: 3, borderTop: `1px solid ${theme.palette.divider}` }}>
+                {/* <Box sx={{ mt: 4, pt: 3, borderTop: `1px solid ${theme.palette.divider}` }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                     <Typography variant="h6" sx={{ fontWeight: 600 }}>
                       Schedule a Meeting
@@ -182,7 +218,7 @@ const Contact = () => {
                   >
                     Book a Meeting
                   </Button>
-                </Box>
+                </Box> */}
               </Paper>
             </motion.div>
           </Grid>
@@ -193,7 +229,7 @@ const Contact = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <Paper
+              {/* <Paper
                 elevation={0}
                 sx={{
                   p: { xs: 3, sm: 4, md: 6 },
@@ -285,7 +321,7 @@ const Contact = () => {
                     </Grid>
                   </Grid>
                 </form>
-              </Paper>
+              </Paper> */}
             </motion.div>
           </Grid>
         </Grid>

@@ -6,6 +6,7 @@ import theme from './styles/theme';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Resume from './pages/Resume';
+import Admin from './pages/Admin';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
@@ -24,6 +25,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/admin" element={<Admin />} />
             </Routes>
           </AnimatePresence>
         </Layout>
