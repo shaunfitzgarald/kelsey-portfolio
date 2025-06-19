@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 import { Download } from '@mui/icons-material';
 import CaseStudy from '../components/CaseStudy';
 
+import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Resume = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -31,8 +36,8 @@ const Resume = () => {
     </Button>
   );
 
-  // Sample resume data - replace with Kelsey's actual information
-  const resumeData = {
+  // Default resume data fallback
+  const defaultResumeData = {
     summary: "Performance Marketing and Customer Success Leader with 10+ years of experience driving growth and delivering exceptional customer experiences. Proven track record of developing data-driven strategies that increase revenue, improve customer retention, and optimize marketing performance.",
     experience: [
       {
@@ -129,6 +134,23 @@ const Resume = () => {
     ]
   };
 
+  const [resumeData, setResumeData] = useState(defaultResumeData);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchResume = async () => {
+      try {
+        const docSnap = await getDoc(doc(db, 'site_content', 'resume'));
+        if (docSnap.exists()) {
+          setResumeData({ ...defaultResumeData, ...docSnap.data() });
+        }
+      } catch (err) {
+        // fallback to defaultResumeData
+      }
+      setLoading(false);
+    };
+    fetchResume();
+  }, []);
 
   const SkillBar = ({ name, level }) => (
     <Box sx={{ mb: 2 }}>
@@ -151,6 +173,14 @@ const Resume = () => {
       </Box>
     </Box>
   );
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ py: 8 }}>

@@ -4,30 +4,70 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LinkedIn, GitHub, Email } from '@mui/icons-material';
 
+import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Home = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const heroContent = {
+  // Default content fallback
+  const defaultContent = {
     title: "Kelsey Sinclaire Stephenson",
     subtitle: "Performance Marketing, Customer Success & Growth Leader",
     description: "Driving business growth through data-driven marketing strategies and exceptional customer experiences. Specializing in performance marketing, customer success, and revenue growth.",
     ctaPrimary: "View Resume",
-    ctaSecondary: "Contact Me"
+    ctaSecondary: "Contact Me",
+    stats: [
+      { value: "10+", label: "Years Experience" },
+      { value: "50+", label: "Happy Clients" },
+      { value: "200%", label: "Revenue Growth" },
+      { value: "99%", label: "Client Retention" }
+    ],
+    socialLinks: [
+      { icon: 'LinkedIn', label: 'LinkedIn', url: 'https://linkedin.com' },
+      { icon: 'GitHub', label: 'GitHub', url: 'https://github.com' },
+      { icon: 'Email', label: 'Email', url: 'mailto:contact@example.com' },
+    ]
   };
 
-  const stats = [
-    { value: "10+", label: "Years Experience" },
-    { value: "50+", label: "Happy Clients" },
-    { value: "200%", label: "Revenue Growth" },
-    { value: "99%", label: "Client Retention" }
-  ];
+  const [content, setContent] = useState(defaultContent);
+  const [loading, setLoading] = useState(true);
 
-  const socialLinks = [
-    { icon: <LinkedIn />, label: 'LinkedIn', url: 'https://linkedin.com' },
-    { icon: <GitHub />, label: 'GitHub', url: 'https://github.com' },
-    { icon: <Email />, label: 'Email', url: 'mailto:contact@example.com' },
-  ];
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const docSnap = await getDoc(doc(db, 'site_content', 'home'));
+        if (docSnap.exists()) {
+          setContent({ ...defaultContent, ...docSnap.data() });
+        }
+      } catch (err) {
+        // fallback to defaultContent
+      }
+      setLoading(false);
+    };
+    fetchContent();
+  }, []);
+
+  // Icon mapping
+  const iconMap = {
+    LinkedIn: <LinkedIn />,
+    GitHub: <GitHub />,
+    Email: <Email />,
+  };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  const { title, subtitle, description, ctaPrimary, ctaSecondary, stats, socialLinks } = content;
+
 
   return (
     <Box>
@@ -72,7 +112,7 @@ const Home = () => {
                     lineHeight: 1.1,
                   }}
                 >
-                  {heroContent.title}
+                  {title}
                 </Typography>
                 <Typography
                   variant="h4"
@@ -84,7 +124,7 @@ const Home = () => {
                     fontSize: { xs: '1.5rem', md: '2rem' },
                   }}
                 >
-                  {heroContent.subtitle}
+                  {subtitle}
                 </Typography>
                 <Typography
                   variant="body1"
@@ -95,7 +135,7 @@ const Home = () => {
                     maxWidth: '90%',
                   }}
                 >
-                  {heroContent.description}
+                  {description}
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 3, mb: 4, flexWrap: 'wrap' }}>
                   <Button
@@ -110,7 +150,7 @@ const Home = () => {
                       fontWeight: 600,
                     }}
                   >
-                    {heroContent.ctaPrimary}
+                    {ctaPrimary}
                   </Button>
                   <Button
                     component={Link}
@@ -124,7 +164,7 @@ const Home = () => {
                       fontWeight: 600,
                     }}
                   >
-                    {heroContent.ctaSecondary}
+                    {ctaSecondary}
                   </Button>
                 </Box>
                 <Box sx={{ display: 'flex', gap: 2, mt: 4 }}>
@@ -142,9 +182,7 @@ const Home = () => {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        startIcon={React.cloneElement(social.icon, {
-                          sx: { fontSize: '1.5rem' }
-                        })}
+                        startIcon={iconMap[social.icon] ? React.cloneElement(iconMap[social.icon], { sx: { fontSize: '1.5rem' } }) : null}
                         sx={{
                           color: 'text.primary',
                           textTransform: 'none',
