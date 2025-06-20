@@ -15,10 +15,10 @@ const Resume = () => {
 
   // Move handleDownload above any usage
   const handleDownload = () => {
-    // Assumes PDF is placed in public/kelsey_stephenson_resume.pdf
+    // Assumes PDF is placed in public/kelsey_stephenson_resume_2025.pdf
     const link = document.createElement('a');
-    link.href = process.env.PUBLIC_URL + '/kelsey_stephenson_resume.pdf';
-    link.download = 'kelsey_stephenson_resume.pdf';
+    link.href = process.env.PUBLIC_URL + '/kelsey_stephenson_resume_2025.pdf';
+    link.download = 'kelsey_stephenson_resume_2025.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -42,41 +42,76 @@ const Resume = () => {
     experience: [
       {
         id: 1,
-        role: "Director of Performance Marketing",
-        company: "GrowthGenius",
-        period: "2020 - Present",
-        location: "San Francisco, CA",
-        description: "Leading a team of 15+ marketing professionals to develop and execute high-impact performance marketing campaigns across multiple channels.",
+        role: "Director of Customer Success",
+        company: "AdSync Media",
+        period: "May 2024 to June 2025",
+        location: "Remote",
+        description: "AdSync is a performance publishing company specializing in high-volume lead generation for the insurance industry, with a focus on Medicare Advantage. Promoted from Head of Customer Success to Director, I led strategic growth and retention across a diverse portfolio of insurance buyers and performance marketing partners.",
         achievements: [
-          "Increased ROAS by 45% through data-driven campaign optimization",
-          "Reduced customer acquisition costs by 30% through advanced audience targeting",
-          "Scaled monthly ad spend from $50K to $500K while maintaining efficiency"
+          "Owned and grew strategic relationships with top insurance firms and performance marketing agencies; led account strategy, pricing conversations, and client-facing communications virtually and at industry events.",
+          "Built a performance tracking system to identify optimization opportunities, guide pricing decisions, and improve RPC, driving incremental revenue growth through data-backed buyer strategy.",
+          "Partnered with Ops and Tech teams to resolve campaign inefficiencies and advise on API integrations, routing, and pacing improvements that supported account scalability.",
+          "Developed a tier-based segmentation model (Premium+, Premium, Optimizable, etc.) and KPI dashboards to prioritize high-impact accounts and enable targeted re-engagements.",
+          "Led cross-functional alignment with Sales, Call Ops, and Media Buying (10 team members), steering growth planning, account pacing, and delivery strategy.",
+          "Launched a weekly scorecard system to shift team focus from reactive support to proactive, data-driven growth."
         ]
       },
       {
         id: 2,
-        role: "Senior Growth Marketing Manager",
-        company: "TechScale Inc.",
-        period: "2017 - 2020",
-        location: "New York, NY",
-        description: "Spearheaded growth initiatives and performance marketing strategies for B2B SaaS products.",
+        role: "Head of Legal & Insurance Programs",
+        company: "Palo Media Group",
+        period: "Aug 2023 to May 2024",
+        location: "Remote",
+        description: "Palo is a performance marketing network and client acquisition platform focused on legal, insurance, and health verticals. Hired to lead demand-side growth and rebuild foundational strategy during a critical operational transition.",
         achievements: [
-          "Grew MRR by 200% in 18 months through strategic initiatives",
-          "Launched successful referral program generating 30% of new business",
-          "Optimized conversion funnels resulting in 2x increase in free-to-paid conversion"
+          "Launched and scaled high-volume verticals including Medicare, SSDI, Mass Tort, and ACA by aligning strategic buyers with vetted publishers to ensure margin stability and long-term scalability.",
+          "Scaled Medicare vertical to $30K/weekly revenue by aligning publisher incentives with client volume and CPA targets.",
+          "Built launch frameworks focused on CPA tracking, compliance, and sourcing strategies to support scalable program growth, client retention, and expansion.",
+          "Led weekly cross-functional strategy meetings across media, affiliate, ops, and leadership teams, using data insights and buyer updates to optimize vertical growth and campaign stability.",
+          "Owned strategic client relationships across law firms, insurance agencies, performance marketing networks, and lead generation companies, driving alignment between buyer goals and supply-side execution."
         ]
       },
       {
         id: 3,
-        role: "Customer Success Manager",
-        company: "CloudSolutions",
-        period: "2015 - 2017",
-        location: "Boston, MA",
-        description: "Managed portfolio of enterprise clients, ensuring successful onboarding and adoption.",
+        role: "Account Manager",
+        company: "StudentCrowd",
+        period: "Jan 2021 to June 2023",
+        location: "Remote",
+        description: "StudentCrowd is the UK’s leading platform for student accommodation reviews and market insights, supporting universities and PBSA providers.",
         achievements: [
-          "Maintained 98% customer retention rate",
-          "Increased upsell revenue by 40% through proactive account management",
-          "Reduced churn by 25% through improved customer engagement strategies"
+          "Managed enterprise accounts in the student accommodation sector, driving £900K+ in ARR and achieving a 92% annual renewal rate.",
+          "Upsold 300+ monthly ad placements while driving adoption of StudentCrowd’s SaaS insights and MarTech tools to expand platform value and client spend.",
+          "Advised clients using student sentiment and performance trends to optimize campaign strategy, booking flow, and market positioning.",
+          "Led webinars, review strategy sessions, and onboarding workshops to drive client education, platform engagement, and long-term success."
+        ]
+      },
+      {
+        id: 4,
+        role: "Sales & Client Experience Manager",
+        company: "Bridging Gaps",
+        period: "Feb 2017 to Mar 2020",
+        location: "Cape Town, South Africa",
+        description: "Bridging Gaps is a purpose-driven education startup offering customized internships in Cape Town focused on personal and professional growth, aligned with ethical tourism initiatives.",
+        achievements: [
+          "Owned the full customer journey for 25+ international students annually from initial sales consultations to in-country onboarding, mentorship, and wrap-up.",
+          "Designed bespoke internship placements across diverse sectors, including nonprofits, healthcare, tech, creative, and more, by aligning student goals with each host organization’s mission and needs.",
+          "Maintained a 9.5/10 star rating on GoOverseas and similar platforms by delivering high-touch, personalized service throughout the experience.",
+          "Drove high conversion rates through relationship-based discovery calls, customizing each journey to the intern's academic and personal development goals.",
+          "Cultivated long-term partnerships with 50+ Cape Town-based organizations, serving as the operational bridge between intern success and community impact."
+        ]
+      },
+      {
+        id: 5,
+        role: "Sales Associate",
+        company: "African Impact",
+        period: "Sep 2015 to Jan 2017",
+        location: "Cape Town, South Africa",
+        description: "African Impact is a social enterprise offering volunteer and educational programs across Africa, with a mission to deliver meaningful, ethical, and community-aligned experiences.",
+        achievements: [
+          "Led sales for the East Africa region, consulting with students and universities to match candidates with high-impact learning programs aligned to regional and participant goals.",
+          "Contributed to go-to-market strategy by helping design and position volunteer programs across diverse focus areas, including healthcare, education, and conservation.",
+          "Supported inbound sales growth through values-driven communication and personalized guidance across international audiences.",
+          "Partnered with global marketing and operations teams to enhance program visibility, participant experience, and long-term engagement."
         ]
       }
     ],
@@ -98,39 +133,38 @@ const Resume = () => {
     },
     education: [
       {
-        degree: "MBA in Marketing",
-        institution: "Stanford Graduate School of Business",
-        year: "2015"
-      },
-      {
-        degree: "B.S. in Business Administration",
-        institution: "University of California, Berkeley",
-        year: "2011"
+        degree: "AAS in Business Communications",
+        institution: "Santa Monica College",
+        year: "2020"
       }
     ],
     skills: {
       technical: [
-        { name: "Digital Marketing", level: 95 },
-        { name: "Google Analytics", level: 90 },
-        { name: "Marketing Automation", level: 85 },
-        { name: "A/B Testing", level: 90 },
-        { name: "CRM Management", level: 85 },
-        { name: "Data Analysis", level: 80 }
+        { name: "HubSpot", level: 95 },
+        { name: "PipeDrive", level: 85 },
+        { name: "Google Workspace", level: 90 },
+        { name: "Google Sheets", level: 90 },
+        { name: "Notion", level: 80 },
+        { name: "Tableau", level: 80 },
+        { name: "Canva", level: 80 },
+        { name: "Task Management Tools", level: 80 }
       ],
       professional: [
-        { name: "Team Leadership", level: 95 },
-        { name: "Strategic Planning", level: 90 },
-        { name: "Client Relations", level: 95 },
-        { name: "Project Management", level: 85 },
-        { name: "Public Speaking", level: 80 },
-        { name: "Negotiation", level: 85 }
+        { name: "Client Success & Retention Strategy", level: 95 },
+        { name: "Cross-Functional Leadership", level: 95 },
+        { name: "Stakeholder Engagement", level: 90 },
+        { name: "B2B Partnerships & Strategic Account Management", level: 90 },
+        { name: "SaaS Adoption & Enablement", level: 85 },
+        { name: "GTM Strategy", level: 85 },
+        { name: "Data-Driven Growth Planning", level: 90 },
+        { name: "Consultative Sales & Upselling", level: 90 }
       ]
     },
     certifications: [
-      "Google Ads Certification",
-      "HubSpot Inbound Marketing",
-      "Facebook Blueprint",
-      "Salesforce Administrator"
+      "Inbound Sales Certification, HubSpot Academy, 2021",
+      "Digital Marketing Certificate, Google, 2020",
+      "Critical Thinking in Business Seminar, Ndala Live, 2023",
+      "Strengths Coaching & Mentorship, Clifton Strengths, 2018 - 2020"
     ]
   };
 
